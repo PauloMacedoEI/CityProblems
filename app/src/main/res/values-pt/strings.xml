@@ -2,4 +2,11 @@
 <resources>
     <string name="app_name">CityProblems</string>
     <string name="welcome">Bem-vindo a</string>
+    <string name="addNote">Adicione uma nota</string>
+    <string name="edit">Editar</string>
+    <string name="remove">Remover</string>
+    <string name="title">Titulo</string>
+    <string name="description">Descrição</string>
+    <string name="save">Salvar</string>
+    <string name="empty_not_saved">Titulo não foi inserido</string>
 </resources>

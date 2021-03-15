@@ -1,5 +1,12 @@
 <resources>
     <string name="app_name">CityProblems</string>
     <string name="welcome">Welcome to</string>
+    <string name="addNote">Add Note</string>
+    <string name="edit">Edit</string>
+    <string name="remove">Remove</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    <string name="save">Save</string>
+    <string name="empty_not_saved">Title not Insert</string>
 
 </resources>
