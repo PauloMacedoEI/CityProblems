@@ -7,6 +7,7 @@
     <string name="title">Title</string>
     <string name="description">Description</string>
     <string name="save">Save</string>
-    <string name="empty_not_saved">Title not Insert</string>
+    <string name="empty_not_saved">Title or description not Insert</string>
+    <string name="cant_be_null">Tittle and description cannot be empty</string>
 
 </resources>

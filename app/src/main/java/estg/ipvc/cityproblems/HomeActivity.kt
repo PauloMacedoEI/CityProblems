@@ -4,7 +4,9 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,10 +22,13 @@ import estg.ipvc.cityproblems.viewModel.NoteViewModelFactory
 class HomeActivity : AppCompatActivity(), NoteAdapter.exemple {
 
     //    private lateinit var noteViewModel: NoteViewModel
-    private val newNoteActivityRequestCode = 1
+//    private val newNoteActivityRequestCode = 1
+//    private val teste = "teste"
+
     private val noteViewModel: NoteViewModel by viewModels {
         NoteViewModelFactory((application as NoteApplication).repository)
     }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,17 +57,19 @@ class HomeActivity : AppCompatActivity(), NoteAdapter.exemple {
         val fab = findViewById<FloatingActionButton>(R.id.buttonAdicionarNota)
         fab.setOnClickListener {
             val intent = Intent(this@HomeActivity, AddNote::class.java)
-            startActivityForResult(intent, newNoteActivityRequestCode)
+            resultInsertNote.launch(intent)
         }
 
 
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, intentData: Intent?) {
-        super.onActivityResult(requestCode, resultCode, intentData)
-        if (requestCode == newNoteActivityRequestCode && resultCode == Activity.RESULT_OK) {            // There are no request codes
-            intentData?.getStringExtra(AddNote.EXTRA_REPLY)?.let { title ->
-                intentData.getStringExtra(AddNote.EXTRA_REPLY1)?.let { desc ->
+    private var resultInsertNote = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+
+
+        if (result.resultCode == Activity.RESULT_OK) {
+            val data:Intent?=result.data // There are no request codes
+            data?.getStringExtra(AddNote.EXTRA_REPLY)?.let { title ->
+                data.getStringExtra(AddNote.EXTRA_REPLY1)?.let { desc ->
                     val note = Note(title = title, description = desc)
                     noteViewModel.insert(note)
                 }
@@ -74,7 +81,6 @@ class HomeActivity : AppCompatActivity(), NoteAdapter.exemple {
                     Toast.LENGTH_LONG
             ).show()
         }
-//    }
     }
 
     override fun deleteClick(position: Int) {
@@ -83,4 +89,31 @@ class HomeActivity : AppCompatActivity(), NoteAdapter.exemple {
         }
     }
 
+    override fun editClick(position: Int) {
+        val intent = Intent(this, EditNote::class.java).apply {
+            putExtra("position", position)
+        }
+        resultEditNote.launch(intent)
+    }
+
+    private var resultEditNote = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {result->
+
+
+        if (result.resultCode == Activity.RESULT_OK) {
+            val data:Intent?=result.data
+            data?.getStringExtra(EditNote.EXTRA_REPLY_EDIT1)?.let { title ->
+                data.getStringExtra(EditNote.EXTRA_REPLY_EDIT2)?.let { descricao ->
+                    data.getIntExtra(EditNote.EXTRA_REPLY_POSITION, 0).let { id ->
+                        val word = Note(id = noteViewModel.allNotes.value?.get(id)?.id, title = title, description= descricao)
+                        noteViewModel.update(word)
+                    }
+                }
+            }
+        } else {
+            Toast.makeText(
+                applicationContext,
+                R.string.cant_be_null,
+                Toast.LENGTH_LONG).show()
+        }
+    }
 }

@@ -22,6 +22,10 @@ class NoteViewModel(private val repository: NoteRepository) : ViewModel() {
         repository.deleteById(note)
     }
 
+    fun update(note: Note) = viewModelScope.launch {
+        repository.updateNote(note)
+    }
+
 //    init {
 //        val notesDao = NoteDB.getDatabase(application, viewModelScope).NoteDao()
 //        repository = NoteRepository(notesDao)

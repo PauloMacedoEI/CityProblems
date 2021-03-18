@@ -40,12 +40,21 @@ class NoteAdapter(private val listener: exemple) : ListAdapter<Note, NoteAdapter
 
         init {
             itemView.findViewById<Button>(R.id.buttonRemover).setOnClickListener(this)
+            itemView.findViewById<Button>(R.id.buttonEditar).setOnClickListener(this)
         }
 
         override fun onClick(v: View?) {
-            val position = adapterPosition
-            if (position != RecyclerView.NO_POSITION){
-                listener.deleteClick(position)
+            if (v?.findViewById<Button>(R.id.buttonRemover)?.isClickable == true) {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    listener.deleteClick(position)
+                }
+            }
+            if (v?.findViewById<Button>(R.id.buttonEditar)?.isClickable == true) {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    listener.editClick(position)
+                }
             }
         }
 
@@ -66,6 +75,8 @@ class NoteAdapter(private val listener: exemple) : ListAdapter<Note, NoteAdapter
 
     interface exemple {
         fun deleteClick(position: Int)
+
+        fun editClick(position: Int)
     }
 
     class NotesComparator : DiffUtil.ItemCallback<Note>() {
