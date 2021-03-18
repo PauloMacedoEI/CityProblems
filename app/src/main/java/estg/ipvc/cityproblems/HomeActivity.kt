@@ -6,21 +6,18 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import estg.ipvc.cityproblems.adapters.NoteAdapter
 import estg.ipvc.cityproblems.application.NoteApplication
 import estg.ipvc.cityproblems.entities.Note
-import estg.ipvc.cityproblems.viewModel.AddNote
 import estg.ipvc.cityproblems.viewModel.NoteViewModel
 import estg.ipvc.cityproblems.viewModel.NoteViewModelFactory
 //import androidx.activity.result.contract.ActivityResultContracts
 
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity(), NoteAdapter.exemple {
 
     //    private lateinit var noteViewModel: NoteViewModel
     private val newNoteActivityRequestCode = 1
@@ -33,7 +30,7 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
 
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
-        val adapter = NoteAdapter()
+        val adapter = NoteAdapter(this)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 //        val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
@@ -57,6 +54,8 @@ class HomeActivity : AppCompatActivity() {
             val intent = Intent(this@HomeActivity, AddNote::class.java)
             startActivityForResult(intent, newNoteActivityRequestCode)
         }
+
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, intentData: Intent?) {
@@ -75,9 +74,13 @@ class HomeActivity : AppCompatActivity() {
                     Toast.LENGTH_LONG
             ).show()
         }
-
-
 //    }
-
     }
+
+    override fun deleteClick(position: Int) {
+        noteViewModel.allNotes.value?.get(position)?.let {
+            noteViewModel.deleteById(it)
+        }
+    }
+
 }

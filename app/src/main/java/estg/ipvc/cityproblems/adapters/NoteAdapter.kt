@@ -4,29 +4,54 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.recyclerview.widget.ListAdapter
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import estg.ipvc.cityproblems.HomeActivity
 import estg.ipvc.cityproblems.R
 import estg.ipvc.cityproblems.entities.Note
 import estg.ipvc.cityproblems.viewModel.NoteViewModel
 
-class NoteAdapter : ListAdapter<Note, NoteAdapter.NoteViewHolder>(NotesComparator()) {
+//class NoteAdapter internal constructor(context: Context, private val callbackInterface: HomeActivity) : RecyclerView.Adapter<NoteAdapter.NoteViewHolder>(){
+
+class NoteAdapter(private val listener: exemple) : ListAdapter<Note, NoteAdapter.NoteViewHolder>(NotesComparator()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
-       return NoteViewHolder.create(parent)
+        val view: View = LayoutInflater.from(parent.context)
+                .inflate(R.layout.recyclerview_item, parent, false)
+        return NoteViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
         val current = getItem(position)
         holder.bindTitle(current.title)
         holder.bindDescription(current.description)
+//        val id: Int? = current.id
+//        holder.noteItemView3.setOnClickListener {
+//            delete(current.id)
+//        }
     }
 
-    class NoteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class NoteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
         private val noteItemView: TextView = itemView.findViewById(R.id.textTitulo)
         private val noteItemView2: TextView = itemView.findViewById(R.id.textDescricao)
 
+
+        init {
+            itemView.findViewById<Button>(R.id.buttonRemover).setOnClickListener(this)
+        }
+
+        override fun onClick(v: View?) {
+            val position = adapterPosition
+            if (position != RecyclerView.NO_POSITION){
+                listener.deleteClick(position)
+            }
+        }
+
+//        fun bindId(id: Int?){
+//            noteItemView3.text = id.toString()
+//        }
 
         fun bindTitle(title: String?) {
             noteItemView.text = title
@@ -36,14 +61,13 @@ class NoteAdapter : ListAdapter<Note, NoteAdapter.NoteViewHolder>(NotesComparato
             noteItemView2.text = description
         }
 
-        companion object {
-            fun create(parent: ViewGroup): NoteViewHolder {
-                val view: View = LayoutInflater.from(parent.context)
-                        .inflate(R.layout.recyclerview_item, parent, false)
-                return NoteViewHolder(view)
-            }
-        }
+
     }
+
+    interface exemple {
+        fun deleteClick(position: Int)
+    }
+
     class NotesComparator : DiffUtil.ItemCallback<Note>() {
         override fun areItemsTheSame(oldItem: Note, newItem: Note): Boolean {
             return oldItem === newItem
