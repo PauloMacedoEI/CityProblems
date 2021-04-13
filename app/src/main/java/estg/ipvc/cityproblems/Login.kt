@@ -12,7 +12,7 @@ class Login : AppCompatActivity() {
 
         supportActionBar?.hide()
 
-
+        //Clicar no botao das notas
         val NotesButton = findViewById<Button>(R.id.goToNotes)
 
         NotesButton.setOnClickListener {
