@@ -26,6 +26,8 @@ class EditNote : AppCompatActivity() {
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_note)
+        supportActionBar?.hide()
+
 
         editTitle1View = findViewById(R.id.edit_title1)
         editDescription1View = findViewById(R.id.edit_description1)

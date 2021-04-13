@@ -10,4 +10,5 @@
     <string name="save">Salvar</string>
     <string name="empty_not_saved">Titulo ou descrição não foram inseridas</string>
     <string name="cant_be_null">Titulo e descrição não podem estar vazios</string>
+    <string name="notes">Notas</string>
 </resources>
