@@ -11,4 +11,10 @@
     <string name="empty_not_saved">Titulo ou descrição não foram inseridas</string>
     <string name="cant_be_null">Titulo e descrição não podem estar vazios</string>
     <string name="notes">Notas</string>
+    <string name="login">Conectado</string>
+    <string name="shared_preferences">Preferências Compartilhadas</string>
+    <string name="username">username</string>
+    <string name="mapa">Mapa</string>
+    <string name="welcomeUserLoged">Bem-Vindo</string>
+    <string name="logout">Sair</string>
 </resources>

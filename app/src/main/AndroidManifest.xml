@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CityProblems">
-        <activity android:name=".Login"></activity>
+        <activity android:name=".MenuLogin"></activity>
+        <activity android:name=".Login" />
         <activity android:name=".EditNote" />
         <activity android:name=".AddNote" />
         <activity android:name=".HomeActivity" />
