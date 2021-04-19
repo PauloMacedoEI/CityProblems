@@ -21,20 +21,17 @@ class Login : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-
         supportActionBar?.hide()
 
-        //Clicar no botao das notas
-        val notesButton = findViewById<Button>(R.id.goToNotes)
 
+        val notesButton = findViewById<Button>(R.id.goToNotes)
         notesButton.setOnClickListener {
             val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
         }
 
-        //Clicar no botao Login
-        val loginButton = findViewById<Button>(R.id.buttonLogin)
 
+        val loginButton = findViewById<Button>(R.id.buttonLogin)
         loginButton.setOnClickListener {
 
             val usernameEditText = findViewById<EditText>(R.id.enterUsername)
@@ -43,13 +40,8 @@ class Login : AppCompatActivity() {
             val username = usernameEditText.text.toString().trim()
             val password = passwordEditText.text.toString().trim()
 
-            Log.i("login", username)
-            Log.i("login", password)
-
             val request = ServiceBuilder.buildService(EndPoints::class.java)
             val call = request.verificarUsers(username = username, password = password)
-
-            Log.i("login", call.toString())
 
             call.enqueue(object : Callback<User> {
                 override fun onResponse(call: Call<User>, response: Response<User>) {
@@ -57,11 +49,11 @@ class Login : AppCompatActivity() {
                         val intent = Intent(this@Login, MenuLogin::class.java)
                         startActivity(intent)
                         finish()
-                        val sessaoAuto: SharedPreferences = getSharedPreferences(
+                        val sessaoIniciada: SharedPreferences = getSharedPreferences(
                                 getString(R.string.shared_preferences),
                                 Context.MODE_PRIVATE
                         )
-                        with(sessaoAuto.edit()) {
+                        with(sessaoIniciada.edit()) {
                             putBoolean(getString(R.string.login), true)
                             putString(getString(R.string.username), username)
                             apply()
@@ -69,7 +61,7 @@ class Login : AppCompatActivity() {
                     }
                 }
                 override fun onFailure(call: Call<User>, t: Throwable) {
-                    Toast.makeText(this@Login, "Login Errado!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@Login, "Este utilizador/password não existe", Toast.LENGTH_SHORT).show()
                 }
             })
         }

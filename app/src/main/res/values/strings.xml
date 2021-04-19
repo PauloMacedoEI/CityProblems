@@ -16,5 +16,6 @@
     <string name="mapa">Map</string>
     <string name="welcomeUserLoged">Welcome</string>
     <string name="logout">Logout</string>
+    <string name="EfetuarLogin">Login</string>
 
 </resources>
