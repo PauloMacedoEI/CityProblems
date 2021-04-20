@@ -50,6 +50,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textAutoComplete"
+        android:hint="Username"
         android:layout_marginLeft="130dp"
         android:layout_marginRight="30dp"
         android:textSize="15dp"
@@ -72,7 +73,8 @@
         android:id="@+id/enterPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textAutoComplete"
+        android:hint="Password"
+        android:inputType="textPassword"
         android:layout_marginLeft="130dp"
         android:layout_marginRight="30dp"
         android:textSize="15dp"
@@ -80,12 +82,12 @@
         app:layout_constraintTop_toTopOf="@+id/textView4" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/buttonLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="160dp"
         android:backgroundTint="@color/cardview_dark_background"
-        android:text="Ok"
+        android:text="@string/EfetuarLogin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
@@ -99,7 +101,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonLogin" />
 
 
 
