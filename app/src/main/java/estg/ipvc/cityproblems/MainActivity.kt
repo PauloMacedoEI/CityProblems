@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         )
 
         Handler(Looper.getMainLooper()).postDelayed({
-            if (sessaoIniciada.getBoolean("Loged", false)) {
+            if (sessaoIniciada.getBoolean("Logged", false)) {
                 val intent = Intent(this@MainActivity, MenuLogin::class.java)
                 startActivity(intent)
                 finish()

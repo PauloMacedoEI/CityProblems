@@ -12,32 +12,31 @@ class MenuLogin : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu_login)
-
         supportActionBar?.hide()
 
-        //Titulo
+
         val welcome = findViewById<TextView>(R.id.welcomeUser)
-        val sessaoAuto: SharedPreferences = getSharedPreferences(
+        val sessaoIniciada: SharedPreferences = getSharedPreferences(
             getString(R.string.shared_preferences),
             Context.MODE_PRIVATE
         )
-        welcome.setText("Welcome " + sessaoAuto.getString("username", null)+" !")
+        welcome.setText("Welcome " + sessaoIniciada.getString("username", null))
 
-        //Butão Notas
+
         val notesButton = findViewById<Button>(R.id.goToNotes)
         notesButton.setOnClickListener {
             val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
         }
 
-        //Butão Logout
+
         val logout = findViewById<Button>(R.id.logout)
         logout.setOnClickListener {
-            val sessaoAuto: SharedPreferences = getSharedPreferences(
+            val sessaoIniciada: SharedPreferences = getSharedPreferences(
                 getString(R.string.shared_preferences),
                 Context.MODE_PRIVATE
             )
-            with(sessaoAuto.edit()) {
+            with(sessaoIniciada.edit()) {
                 clear()
                 apply()
             }

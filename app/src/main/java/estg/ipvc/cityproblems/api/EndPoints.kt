@@ -7,7 +7,7 @@ import retrofit2.http.POST
 
 interface EndPoints {
     @FormUrlEncoded
-    @POST( "userverification")
+    @POST( "verificaruser")
     fun verificarUsers(@Field("username")username:String, @Field("password")password:String): Call<User>
 
 

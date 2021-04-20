@@ -10,7 +10,7 @@
     <string name="empty_not_saved">Title or description not Insert</string>
     <string name="cant_be_null">Tittle and description cannot be empty</string>
     <string name="notes">Notes</string>
-    <string name="login">Loged</string>
+    <string name="login">Logged</string>
     <string name="shared_preferences">SharedPreferences</string>
     <string name="username">username</string>
     <string name="mapa">Map</string>
