@@ -23,6 +23,7 @@ class AddNote : AppCompatActivity() {
         editTitleView = findViewById(R.id.edit_title)
         editDescriptionView = findViewById(R.id.edit_description)
 
+        //button
         val button = findViewById<Button>(R.id.buttonSave)
         button.setOnClickListener {
             val replyIntent = Intent()
