@@ -1,10 +1,14 @@
 package estg.ipvc.cityproblems
 
 import android.Manifest
+import android.content.Context
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -13,9 +17,16 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import estg.ipvc.cityproblems.api.Anomalia
+import estg.ipvc.cityproblems.api.EndPoints
+import estg.ipvc.cityproblems.api.ServiceBuilder
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class Map : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
@@ -41,6 +52,46 @@ class Map : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
+        val sessaoIniciada: SharedPreferences = getSharedPreferences(
+                getString(R.string.shared_preferences),
+                Context.MODE_PRIVATE
+        )
+
+        val request = ServiceBuilder.buildService(EndPoints::class.java)
+        val call = request.getAllAnomalias()
+
+        call.enqueue(object : Callback<List<Anomalia>> {
+            override fun onResponse(call: Call<List<Anomalia>>, response: Response<List<Anomalia>>) {
+                Log.i("response", response.toString())
+
+
+                if (response.isSuccessful) {
+                    val anomalias = response.body()!!
+                    Log.i("user", response.toString())
+
+                    for(i in anomalias){
+                        val latlong = LatLng(i.latitude,i.longitude)
+                        Log.i("user", i.user_id.toString())
+                        if(i.user_id.equals(sessaoIniciada.all[getString(R.string.id)])) {
+                            //login, share_preferances
+                            map.addMarker(MarkerOptions()
+                                    .position(latlong)
+                                    .title(i.titulo)
+                                    .snippet(i.descricao)
+                                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)))
+                        }else{
+                            map.addMarker(MarkerOptions().position(latlong).title(i.titulo).snippet(i.descricao).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)))
+
+
+                        }
+                    }
+
+                }
+            }
+            override fun onFailure(call: Call<List<Anomalia>>, t: Throwable) {
+                Toast.makeText(this@Map, "Markers Errado!", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     /**
@@ -57,6 +108,7 @@ class Map : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
 
         map.uiSettings.isZoomControlsEnabled = true
         map.setOnMarkerClickListener(this)
+        map.mapType = GoogleMap.MAP_TYPE_SATELLITE
 
         setUpMap()
 
@@ -86,7 +138,7 @@ class Map : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
             if (location != null) {
                 lastLocation = location
                 val currentLatLng = LatLng(location.latitude, location.longitude)
-                map.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 12f))
+                map.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 17f))
             }
         }
 

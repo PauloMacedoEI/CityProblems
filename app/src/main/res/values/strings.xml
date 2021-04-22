@@ -17,6 +17,6 @@
     <string name="welcomeUserLoged">Welcome</string>
     <string name="logout">Logout</string>
     <string name="EfetuarLogin">Login</string>
-    <string name="title_activity_map">Map</string>
-
+    <string name="title_activity_map" translatable="false">Map</string>
+    <string name="id" translatable="false">id</string>
 </resources>
