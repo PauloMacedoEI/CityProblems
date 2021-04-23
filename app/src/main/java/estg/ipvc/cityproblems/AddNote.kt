@@ -9,7 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 
 class AddNote : AppCompatActivity() {
-
+//
     private lateinit var editTitleView: EditText
     private lateinit var editDescriptionView: EditText
 
