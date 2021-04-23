@@ -37,6 +37,7 @@ class Login : AppCompatActivity() {
             val usernameEditText = findViewById<EditText>(R.id.enterUsername)
             val passwordEditText = findViewById<EditText>(R.id.enterPassword)
 
+            //trim - remover espaços
             val username = usernameEditText.text.toString().trim()
             val password = passwordEditText.text.toString().trim()
 

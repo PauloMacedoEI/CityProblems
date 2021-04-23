@@ -11,6 +11,6 @@ interface EndPoints {
     @GET("anomalia")
     fun getAllAnomalias(): retrofit2.Call<List<Anomalia>>
 
-    @GET("user/{id}/anomalia")
-    fun getAllUserAnomalias(@Path("id")id_username:Int): retrofit2.Call<List<Anomalia>>
+    //@GET("user/{id}/anomalia")
+    //fun getAllUserAnomalias(@Path("id")id_username:Int): retrofit2.Call<List<Anomalia>>
 }
