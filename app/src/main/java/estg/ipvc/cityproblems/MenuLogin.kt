@@ -29,6 +29,12 @@ class MenuLogin : AppCompatActivity() {
             startActivity(intent)
         }
 
+        val mapButton = findViewById<Button>(R.id.buttonMapa)
+        mapButton.setOnClickListener {
+            val intent = Intent(this, Map::class.java)
+            startActivity(intent)
+        }
+
 
         val logout = findViewById<Button>(R.id.logout)
         logout.setOnClickListener {
