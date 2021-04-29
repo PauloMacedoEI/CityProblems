@@ -19,4 +19,6 @@
     <string name="EfetuarLogin">Login</string>
     <string name="title_activity_map" translatable="false">Map</string>
     <string name="id" translatable="false">id</string>
+    <string name="addAnomaly">Add Anomaly</string>
+    <string name="successfully_inserted">Successfully Inserted</string>
 </resources>

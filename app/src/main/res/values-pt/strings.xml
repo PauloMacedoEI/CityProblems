@@ -18,4 +18,6 @@
     <string name="welcomeUserLoged">Bem-Vindo</string>
     <string name="logout">Sair</string>
     <string name="EfetuarLogin">Entrar</string>
+    <string name="addAnomaly">Adicionar Anomalia</string>
+    <string name="successfully_inserted">Inserido com Sucesso</string>
 </resources>

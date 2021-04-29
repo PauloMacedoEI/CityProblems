@@ -2,6 +2,7 @@ package estg.ipvc.cityproblems
 
 import android.Manifest
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.location.Location
@@ -21,6 +22,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import estg.ipvc.cityproblems.api.Anomalia
 import estg.ipvc.cityproblems.api.EndPoints
 import estg.ipvc.cityproblems.api.ServiceBuilder
@@ -48,6 +50,23 @@ class Map : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
         mapFragment.getMapAsync(this)
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+
+        val addAnomaliaButton = findViewById<FloatingActionButton>(R.id.buttonAdicionarAnomalia)
+        addAnomaliaButton.setOnClickListener {
+            val intent = Intent(this@Map, AddAnomalia::class.java)
+            startActivity(intent)
+        }
+
+    }
+
+    override fun onMapReady(googleMap: GoogleMap) {
+        map = googleMap
+
+        map.uiSettings.isZoomControlsEnabled = true
+        map.setOnMarkerClickListener(this)
+        map.mapType = GoogleMap.MAP_TYPE_SATELLITE
+
+        setUpMap()
 
         val sessaoIniciada: SharedPreferences = getSharedPreferences(
                 getString(R.string.shared_preferences),
@@ -82,16 +101,6 @@ class Map : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
                 Toast.makeText(this@Map, "Markers Errado!", Toast.LENGTH_SHORT).show()
             }
         })
-    }
-
-    override fun onMapReady(googleMap: GoogleMap) {
-        map = googleMap
-
-        map.uiSettings.isZoomControlsEnabled = true
-        map.setOnMarkerClickListener(this)
-        map.mapType = GoogleMap.MAP_TYPE_SATELLITE
-
-        setUpMap()
 
         // premissoes de localização
         if (ActivityCompat.checkSelfPermission(
