@@ -70,6 +70,7 @@ class AddAnomalia : AppCompatActivity() {
 
                     val titulo = editTextTitle.text.toString()
                     val descricao = editTextDesc.text.toString()
+                    val tipo = "buraco"
                     val foto = ""
                     val user_id = id
                     val latitude = lastLocation.latitude
@@ -82,7 +83,7 @@ class AddAnomalia : AppCompatActivity() {
                     Log.i("descricao", descricao)
 
                     val request = ServiceBuilder.buildService(EndPoints::class.java)
-                    val call = request.insertAnomalia(titulo,descricao,foto,latitude.toString(),longitude.toString(),user_id.toString().toInt())
+                    val call = request.insertAnomalia(titulo,descricao,tipo,foto,latitude.toString(),longitude.toString(),user_id.toString().toInt())
 
 
                     call.enqueue(object : Callback<Anomalia> {

@@ -22,4 +22,7 @@
     <string name="addAnomaly">Add Anomaly</string>
     <string name="successfully_inserted">Successfully Inserted</string>
     <string name="error">Error</string>
+    <string name="meters_1000">1000 meters</string>
+    <string name="meters_5000">5000 meters</string>
+
 </resources>

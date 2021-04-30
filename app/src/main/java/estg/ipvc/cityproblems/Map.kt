@@ -60,10 +60,19 @@ class Map : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
             startActivity(intent)
         }
 
-        val switchDistancia = findViewById<Switch>(R.id.switch1)
-        switchDistancia.setOnCheckedChangeListener { _, isCheked ->
+        val switchDistancia1000 = findViewById<Switch>(R.id.switch1000)
+        switchDistancia1000.setOnCheckedChangeListener { _, isCheked ->
             if (isCheked) {
-                filtroDistancia()
+                filtroDistancia1000()
+            } else {
+                onMapReady(map)
+            }
+        }
+
+        val switchDistancia5000 = findViewById<Switch>(R.id.switch5000)
+        switchDistancia5000.setOnCheckedChangeListener { _, isCheked ->
+            if (isCheked) {
+                filtroDistancia5000()
             } else {
                 onMapReady(map)
             }
@@ -75,7 +84,7 @@ class Map : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
         return results[0]
     }
 
-    fun filtroDistancia() {
+    fun filtroDistancia1000() {
 
         if (ActivityCompat.checkSelfPermission(this,
                         android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -105,25 +114,65 @@ class Map : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
 
                                     position = LatLng(anomalia.latitude, anomalia.longitude)
 
-                                    if (calcularDistancia(location.latitude, location.longitude, anomalia.latitude, anomalia.longitude) < 1000) {
+                                    if (calcularDistancia(location.latitude, location.longitude, anomalia.latitude, anomalia.longitude) <= 1000) {
+                                        map.addMarker(MarkerOptions()
+                                                .position(position)
+                                                .title(anomalia.titulo)
+                                                .snippet("Distancia: " + results[0].roundToInt() + " metros")
+                                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)))
+
+                                    }
+                                }
+                            }
+                        }
+
+                        override fun onFailure(call: Call<List<Anomalia>>, t: Throwable) {
+                            Toast.makeText(this@Map, getString(R.string.error), Toast.LENGTH_SHORT).show()
+                        }
+                    })
+                }
+            }
+        }
+    }
+
+
+    fun filtroDistancia5000() {
+
+        if (ActivityCompat.checkSelfPermission(this,
+                        android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), 1)
+            return
+        } else {
+            fusedLocationClient.lastLocation.addOnSuccessListener(this) { location ->
+                if (location != null) {
+                    lastLocation = location
+
+                    map.clear()
+
+                    val request = ServiceBuilder.buildService(EndPoints::class.java)
+                    val call = request.getAllAnomalias()
+                    var position: LatLng
+
+
+                    call.enqueue(object : Callback<List<Anomalia>> {
+                        override fun onResponse(call: Call<List<Anomalia>>, response: Response<List<Anomalia>>) {
+
+                            if (response.isSuccessful) {
+
+                                val anomalias = response.body()!!
+
+                                for (anomalia in anomalias) {
+
+                                    position = LatLng(anomalia.latitude, anomalia.longitude)
+
+                                    if (calcularDistancia(location.latitude, location.longitude, anomalia.latitude, anomalia.longitude) <= 5000) {
                                         map.addMarker(MarkerOptions()
                                                 .position(position)
                                                 .title(anomalia.titulo)
                                                 .snippet("Distancia: " + results[0].roundToInt() + " metros")
                                                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE)))
 
-                                    } else if (calcularDistancia(location.latitude, location.longitude, anomalia.latitude, anomalia.longitude) < 2000) {
-                                        map.addMarker(MarkerOptions()
-                                                .position(position)
-                                                .title(anomalia.titulo)
-                                                .snippet("Distancia: " + results[0].roundToInt() + " metros")
-                                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN)))
-                                    } else {
-                                        map.addMarker(MarkerOptions()
-                                                .position(position)
-                                                .title(anomalia.titulo)
-                                                .snippet("Distancia: " + results[0].roundToInt() + " metros")
-                                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET)))
                                     }
                                 }
                             }

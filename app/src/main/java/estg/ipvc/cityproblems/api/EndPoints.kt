@@ -13,7 +13,7 @@ interface EndPoints {
 
     @FormUrlEncoded
     @POST("inserirAnomalia")
-    fun insertAnomalia(@Field("titulo") titulo: String?, @Field("descricao") descricao: String?, @Field("foto") foto: String?, @Field("latitude") latitude: String?, @Field("longitude") longitude: String?, @Field("user_id") user_id: Int?): retrofit2.Call<Anomalia>
+    fun insertAnomalia(@Field("titulo") titulo: String?, @Field("descricao") descricao: String?, @Field("tipo") tipo: String?, @Field("foto") foto: String?, @Field("latitude") latitude: String?, @Field("longitude") longitude: String?, @Field("user_id") user_id: Int?): retrofit2.Call<Anomalia>
 
     //@GET("user/{id}/anomalia")
     //fun getAllUserAnomalias(@Path("id")id_username:Int): retrofit2.Call<List<Anomalia>>
