@@ -29,7 +29,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class Map : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
-
+//
     private lateinit var map: GoogleMap
     private lateinit var lastLocation: Location
     private lateinit var fusedLocationClient: FusedLocationProviderClient
