@@ -15,7 +15,7 @@ import estg.ipvc.cityproblems.entities.Note
 import estg.ipvc.cityproblems.viewModel.NoteViewModel
 
 //class NoteAdapter internal constructor(context: Context, private val callbackInterface: HomeActivity) : RecyclerView.Adapter<NoteAdapter.NoteViewHolder>(){
-//class//
+//class////
 class NoteAdapter(private val listener: exemple) : ListAdapter<Note, NoteAdapter.NoteViewHolder>(NotesComparator()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
         val view: View = LayoutInflater.from(parent.context)
