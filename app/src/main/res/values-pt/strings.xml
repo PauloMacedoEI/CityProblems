@@ -18,4 +18,10 @@
     <string name="welcomeUserLoged">Bem-Vindo</string>
     <string name="logout">Sair</string>
     <string name="EfetuarLogin">Entrar</string>
+    <string name="addAnomaly">Adicionar Anomalia</string>
+    <string name="successfully_inserted">Inserido com Sucesso</string>
+    <string name="error">Erro</string>
+    <string name="meters_1000">1000 metros</string>
+    <string name="meters_5000">5000 metros</string>
+
 </resources>
