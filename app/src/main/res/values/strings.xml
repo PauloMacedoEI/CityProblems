@@ -35,6 +35,11 @@
     <string name="traffic">Traffic</string>
     <string name="allTypes">All</string>
     <string name="sensors">Sensors</string>
+    <string name="delete">Delete</string>
+    <string name="popupTitulo">Delete</string>
+    <string name="popupMensage">These changes cannot be reversed!</string>
+    <string name="popConfirm">Yes</string>
+    <string name="popupRefuse">Cancel</string>
 
 
 </resources>

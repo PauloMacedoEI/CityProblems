@@ -18,4 +18,13 @@ interface EndPoints {
 
     @GET("anomalia/{tipo}")
     fun getAnomaliaByType(@Path("tipo") tipo: String?): retrofit2.Call<List<Anomalia>>
+
+//    @FormUrlEncoded
+//    @POST( "eliminarAnomalia/{id}")
+//    fun eliminarAnomalia(@Field("id") id:Int): Call<Anomalia>
+
+    @GET("eliminarUmaAnomalia/{id}")
+    fun eliminarAnomalia(
+        @Path("id") id: Int
+    ): Call<Anomalia>
 }

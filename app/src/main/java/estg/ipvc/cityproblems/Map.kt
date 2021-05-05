@@ -392,13 +392,15 @@ class Map : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
                         val latlong = LatLng(i.latitude,i.longitude)
                         //criar markers
                         if(i.user_id.equals(sessaoIniciada.all[getString(R.string.id)])) {
-                            map.addMarker(MarkerOptions()
+                            val marker: Marker? = map.addMarker(MarkerOptions()
                                     .position(latlong)
                                     .title(i.titulo)
                                     .snippet(i.descricao)
                                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)))
+                            marker?.tag = i
                         }else{
-                            map.addMarker(MarkerOptions().position(latlong).title(i.titulo).snippet(i.descricao).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)))
+                            val marker: Marker? = map.addMarker(MarkerOptions().position(latlong).title(i.titulo).snippet(i.descricao).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)))
+                            marker?.tag = i
                         }
                     }
                 }
@@ -432,9 +434,21 @@ class Map : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
         }
 
 
-        map.setOnMarkerClickListener {
-            map.setInfoWindowAdapter(AnomaliaInfo(this))
-            false
+//        map.setOnMarkerClickListener {
+//            map.setInfoWindowAdapter(MarkerInfo(this))
+//            false
+//        }
+
+        map.setInfoWindowAdapter(MarkerInfo(this))
+        //Passar a informação quando a InfoWindow é clicada
+
+        map.setOnInfoWindowClickListener { marker ->
+            val anomalia = arrayListOf<Anomalia>()
+            anomalia.add(marker.tag as Anomalia)
+            val intent = Intent(this, AnomaliaInfo::class.java).apply{
+                putExtra("anomaliaX", anomalia)
+            }
+            startActivity(intent)
         }
     }
 

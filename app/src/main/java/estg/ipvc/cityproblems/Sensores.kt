@@ -11,7 +11,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatDelegate
 import com.mikhaellopez.circularprogressbar.CircularProgressBar
 
-class SensorLuminosidade : AppCompatActivity(), SensorEventListener {
+class Sensores : AppCompatActivity(), SensorEventListener {
 
     private lateinit var sensorManager: SensorManager
 
@@ -26,7 +26,7 @@ class SensorLuminosidade : AppCompatActivity(), SensorEventListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_sensor_luminosidade)
+        setContentView(R.layout.activity_sensores)
         supportActionBar?.hide()
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
