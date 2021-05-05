@@ -35,6 +35,12 @@ class MenuLogin : AppCompatActivity() {
             startActivity(intent)
         }
 
+        val sensorsButton = findViewById<Button>(R.id.sensorsButton)
+        sensorsButton.setOnClickListener {
+            val intent = Intent(this, SensorLuminosidade::class.java)
+            startActivity(intent)
+        }
+
 
         val logout = findViewById<Button>(R.id.logout)
         logout.setOnClickListener {

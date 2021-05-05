@@ -28,5 +28,6 @@
     <string name="construction">Construções</string>
     <string name="traffic">Transito</string>
     <string name="allTypes">Todos</string>
+    <string name="sensors">Sensores</string>
 
 </resources>
