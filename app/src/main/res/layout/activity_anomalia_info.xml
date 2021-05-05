@@ -1,69 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/layoutAnomalia"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="300dp"
-    android:layout_height="wrap_content"
-    tools:context=".AnomaliaInfo"
-    android:background="#E6f8f5f1">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddAnomalia"
+    android:orientation="vertical"
+    android:background="@drawable/estrada">
 
     <TextView
-        android:id="@+id/title_anomalia"
-        android:layout_width="0dp"
+        android:id="@+id/InfoanomaliaTitle"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="22dp"
+        android:text="@string/title"
+        android:textSize="25dp"
+        android:textStyle="bold"/>
 
-    <!--    <TextView-->
-    <!--        android:id="@+id/descMarker"-->
-    <!--        android:layout_width="0dp"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginStart="8dp"-->
-    <!--        android:layout_marginLeft="8dp"-->
-    <!--        android:layout_marginTop="16dp"-->
-    <!--        android:layout_marginEnd="8dp"-->
-    <!--        android:layout_marginRight="8dp"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/tituloMarker" />-->
-
-    <!--    <ImageView-->
-    <!--        android:id="@+id/foto"-->
-    <!--        android:layout_width="4dp"-->
-    <!--        android:layout_height="3dp"-->
-    <!--        android:layout_marginTop="16dp"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/descMarker" />-->
+    <EditText
+        android:id="@+id/info_anomalia_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textAutoComplete"
+        android:textSize="15dp"/>
 
     <TextView
-        android:id="@+id/user_anomalia"
-        android:layout_width="0dp"
+        android:id="@+id/InfoanomaliaDescription"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_anomalia" />
+        android:layout_marginTop="22dp"
+        android:text="@string/description"
+        android:textSize="25dp"
+        android:textStyle="bold"/>
+
+    <EditText
+        android:id="@+id/info_anomalia_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textAutoComplete"
+        android:textSize="15dp"/>
+
+    <TextView
+        android:id="@+id/InfoanomaliaType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:text="@string/type"
+        android:textSize="25dp"
+        android:textStyle="bold"/>
+
+    <EditText
+        android:id="@+id/info_anomalia_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textAutoComplete"
+        android:textSize="15dp"/>
 
     <Button
-        android:id="@+id/deleteAnomalia"
-        android:layout_width="200dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="16dp"
-        android:text="Ver"
-        android:textSize="8sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/user_anomalia" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:id="@+id/buttonDelete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:onClick="submitAnomalia"
+        android:text="@string/delete" />
+
+
+</LinearLayout>

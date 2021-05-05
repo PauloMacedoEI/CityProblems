@@ -29,5 +29,10 @@
     <string name="traffic">Transito</string>
     <string name="allTypes">Todos</string>
     <string name="sensors">Sensores</string>
+    <string name="delete">Apagar</string>
+    <string name="popupTitulo">Apagar</string>
+    <string name="popupMensage">Não puderás voltar atrás</string>
+    <string name="popConfirm">Sim</string>
+    <string name="popupRefuse">Cancelar</string>
 
 </resources>

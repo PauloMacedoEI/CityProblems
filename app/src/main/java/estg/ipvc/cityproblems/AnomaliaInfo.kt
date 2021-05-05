@@ -1,56 +1,94 @@
 package estg.ipvc.cityproblems
 
-import android.app.Activity
 import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.model.Marker
-import estg.ipvc.cityproblems.api.Anomalia
+import android.text.SpannableStringBuilder
+import android.util.Log
+import android.widget.Button
+import android.widget.EditText
+import android.widget.LinearLayout
+import androidx.appcompat.app.AlertDialog
 import retrofit2.Callback
+import androidx.core.view.isVisible
+import estg.ipvc.cityproblems.api.Anomalia
+import estg.ipvc.cityproblems.api.EndPoints
+import estg.ipvc.cityproblems.api.ServiceBuilder
+import retrofit2.Call
+import retrofit2.Response
+
+class AnomaliaInfo : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_anomalia_info)
+        supportActionBar?.hide()
+
+        val sessaoIniciada: SharedPreferences = getSharedPreferences(
+                getString(R.string.shared_preferences),
+                Context.MODE_PRIVATE
+        )
+
+        val userID = sessaoIniciada.getInt("id", 0)
+
+        val anomalia = intent?.getParcelableArrayListExtra<Anomalia>("anomaliaX")
 
 
-class AnomaliaInfo(context: Context) : GoogleMap.InfoWindowAdapter{
+        val titleTextInputLayout = findViewById<EditText>(R.id.info_anomalia_title)
+        titleTextInputLayout.text = SpannableStringBuilder(anomalia?.get(0)?.titulo)
+        val descTextInputLayout = findViewById<EditText>(R.id.info_anomalia_description)
+        descTextInputLayout.text = SpannableStringBuilder(anomalia?.get(0)?.descricao)
+        val typeTextInputLayout = findViewById<EditText>(R.id.info_anomalia_type)
+        typeTextInputLayout.text = SpannableStringBuilder(anomalia?.get(0)?.tipo)
 
-    var mContext = context
-    var mapaWindow = (context as Activity).layoutInflater.inflate(R.layout.activity_anomalia_info, null)
+        val deleteAnomalyButton = findViewById<Button>(R.id.buttonDelete)
 
+        if(userID == anomalia?.get(0)?.user_id) {
+            deleteAnomalyButton.isVisible = true
+        }
 
-    private fun janela(marker: Marker, view: View){
-        val titulo = view.findViewById<TextView>(R.id.title_anomalia)
-//        val descricao = view.findViewById<TextView>(R.id.descMarker)
-//        val imagem = view.findViewById<ImageView>(R.id.foto)
-        val user = view.findViewById<TextView>(R.id.user_anomalia)
-        val layout = view.findViewById<ConstraintLayout>(R.id.layoutAnomalia)
-        val data = marker.snippet.split("+").toTypedArray()
+        deleteAnomalyButton.setOnClickListener {
+            val builder = AlertDialog.Builder(window.context)
+            builder.apply {
+                setTitle(R.string.popupTitulo)
+                setMessage(R.string.popupMensage)
+                setPositiveButton(R.string.popConfirm
+                ) { dialog, _ ->
+                    // User clicked Yes button
+                    val request = ServiceBuilder.buildService(EndPoints::class.java)
+                    val call = request.eliminarAnomalia(id = anomalia?.get(0)?.id!!)
 
+                    call.enqueue(object : Callback<Anomalia> {
+                        override fun onResponse(call: Call<Anomalia>, response: Response<Anomalia>) {
+                            if (response.isSuccessful) {
+                                Log.i("VisualizeAnomaly", "Delete anomaly successful")
 
-        titulo.text = marker.title.take(20)+"..."
-        //descricao.text = data[0]
-//        Picasso.get().load(data[5]).into(imagem);
-//        imagem.getLayoutParams().height = 200;
-//        imagem.getLayoutParams().width = 100;
-//        imagem.requestLayout();
-//
-//        if(data[2].toInt() == data[3].toInt()){
-//            user.text = data[4]
-//            user.visibility = (View.VISIBLE)
-//            layout.visibility = (View.VISIBLE)
-//        }
-//        else{
-//                user.visibility = (View.GONE)
-//                layout.visibility = (View.GONE) }
+                                val intent = Intent(this@AnomaliaInfo, Map::class.java)
+                                startActivity(intent)
+                                finish()
+                            }
+                        }
+
+                        override fun onFailure(call: Call<Anomalia>?, t: Throwable?) {
+                            Log.i("VisualizeAnomaly", "Delete anomaly failed")
+                            val intent = Intent(this@AnomaliaInfo, Map::class.java)
+                            startActivity(intent)
+                            finish()
+                        }
+                    })
+                    dialog.dismiss()
+                }
+                setNegativeButton(R.string.popupRefuse
+                ) { dialog, _ ->
+                    // User cancelled the dialog
+                    dialog.dismiss()
+                }
+            }
+            // Create the AlertDialog
+            builder.create()
+            builder.show()
+        }
     }
-    override fun getInfoWindow(marker: Marker): View {
-        janela(marker, mapaWindow)
-        return mapaWindow
-    }
-    override fun getInfoContents(marker: Marker): View? {
-        janela(marker, mapaWindow)
-        return mapaWindow
-    }
+
 }
