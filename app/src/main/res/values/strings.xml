@@ -34,6 +34,7 @@
     <string name="construction">Construction</string>
     <string name="traffic">Traffic</string>
     <string name="allTypes">All</string>
+    <string name="sensors">Sensors</string>
 
 
 </resources>
