@@ -23,5 +23,10 @@
     <string name="error">Erro</string>
     <string name="meters_1000">1000 metros</string>
     <string name="meters_5000">5000 metros</string>
+    <string name="type">Tipo</string>
+    <string name="damage">Estragos</string>
+    <string name="construction">Construções</string>
+    <string name="traffic">Transito</string>
+    <string name="allTypes">Todos</string>
 
 </resources>
