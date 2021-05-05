@@ -40,15 +40,26 @@
         android:inputType="textAutoComplete"
         android:textSize="15dp"/>
 
+    <TextView
+        android:id="@+id/anomaliaTypeLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:text="@string/type"
+        android:textSize="25dp"
+        android:textStyle="bold"/>
+
+    <Spinner
+        android:id="@+id/type_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <Button
-        android:onClick="submitAnomalia"
         android:id="@+id/buttonSave"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/save"
-         />
-
-
+        android:onClick="submitAnomalia"
+        android:text="@string/save" />
 
 
 </LinearLayout>

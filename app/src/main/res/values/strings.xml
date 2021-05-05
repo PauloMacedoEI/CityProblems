@@ -24,5 +24,16 @@
     <string name="error">Error</string>
     <string name="meters_1000">1000 meters</string>
     <string name="meters_5000">5000 meters</string>
+    <string name="type">Type</string>
+    <string-array name="type_array">
+        <item>Estragos</item>
+        <item>Obras</item>
+        <item>Transito</item>
+    </string-array>
+    <string name="damage">Damage</string>
+    <string name="construction">Construction</string>
+    <string name="traffic">Traffic</string>
+    <string name="allTypes">All</string>
+
 
 </resources>

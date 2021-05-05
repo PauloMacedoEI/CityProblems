@@ -9,7 +9,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.ArrayAdapter
 import android.widget.EditText
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -18,6 +20,7 @@ import com.google.android.gms.maps.model.LatLng
 import estg.ipvc.cityproblems.api.Anomalia
 import estg.ipvc.cityproblems.api.EndPoints
 import estg.ipvc.cityproblems.api.ServiceBuilder
+import org.w3c.dom.Text
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -28,6 +31,8 @@ class AddAnomalia : AppCompatActivity() {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var editTextTitle: EditText
     private lateinit var editTextDesc: EditText
+    private lateinit var spinnerTextType: Spinner
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,7 +42,17 @@ class AddAnomalia : AppCompatActivity() {
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
-
+        val spinner: Spinner = findViewById(R.id.type_spinner)
+        ArrayAdapter.createFromResource(
+                this,
+                R.array.type_array,
+                android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            // Specify the layout to use when the list of choices appears
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            // Apply the adapter to the spinner
+            spinner.adapter = adapter
+        }
 
     }
 
@@ -52,11 +67,8 @@ class AddAnomalia : AppCompatActivity() {
             fusedLocationClient.lastLocation.addOnSuccessListener(this) { location ->
                 if (location != null) {
                     lastLocation = location
-
                     val currentLatLng = LatLng(location.latitude, location.longitude)
-
                     var id: Int? = 0
-
                     val sessaoIniciada: SharedPreferences = getSharedPreferences(
                             getString(R.string.shared_preferences),
                             Context.MODE_PRIVATE
@@ -64,13 +76,13 @@ class AddAnomalia : AppCompatActivity() {
 
                     id = sessaoIniciada.all[getString(R.string.id)] as Int?
 
-
                     editTextTitle = findViewById(R.id.anomalia_title)
                     editTextDesc = findViewById(R.id.anomalia_description)
+                    spinnerTextType = findViewById(R.id.type_spinner)
 
                     val titulo = editTextTitle.text.toString()
                     val descricao = editTextDesc.text.toString()
-                    val tipo = "buraco"
+                    val tipo = spinnerTextType.selectedItem
                     val foto = ""
                     val user_id = id
                     val latitude = lastLocation.latitude
@@ -80,10 +92,12 @@ class AddAnomalia : AppCompatActivity() {
                     Log.i("longitude", longitude.toString())
                     Log.i("login_id", user_id.toString())
                     Log.i("titulo", titulo)
+                    Log.i("tipo", tipo.toString())
                     Log.i("descricao", descricao)
 
                     val request = ServiceBuilder.buildService(EndPoints::class.java)
-                    val call = request.insertAnomalia(titulo,descricao,tipo,foto,latitude.toString(),longitude.toString(),user_id.toString().toInt())
+                    val call = request.insertAnomalia(titulo,descricao,tipo.toString(),foto,latitude.toString(),longitude.toString(),user_id.toString().toInt())
+
 
 
                     call.enqueue(object : Callback<Anomalia> {
