@@ -72,12 +72,11 @@
 
     <EditText
         android:id="@+id/enterPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="547dp"
+        android:layout_height="38dp"
+        android:layout_marginRight="30dp"
         android:hint="@string/passwordLogin"
         android:inputType="textPassword"
-        android:layout_marginLeft="130dp"
-        android:layout_marginRight="30dp"
         android:textSize="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView4" />

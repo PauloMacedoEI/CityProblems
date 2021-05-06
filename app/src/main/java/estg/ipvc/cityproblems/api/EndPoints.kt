@@ -15,16 +15,9 @@ interface EndPoints {
     @POST("inserirAnomalia")
     fun insertAnomalia(@Field("titulo") titulo: String?, @Field("descricao") descricao: String?, @Field("tipo") tipo: String?, @Field("foto") foto: String?, @Field("latitude") latitude: String?, @Field("longitude") longitude: String?, @Field("user_id") user_id: Int?): retrofit2.Call<Anomalia>
 
-
     @GET("anomalia/{tipo}")
     fun getAnomaliaByType(@Path("tipo") tipo: String?): retrofit2.Call<List<Anomalia>>
 
-//    @FormUrlEncoded
-//    @POST( "eliminarAnomalia/{id}")
-//    fun eliminarAnomalia(@Field("id") id:Int): Call<Anomalia>
-
     @GET("eliminarUmaAnomalia/{id}")
-    fun eliminarAnomalia(
-        @Path("id") id: Int
-    ): Call<Anomalia>
+    fun eliminarAnomalia(@Path("id") id: Int): Call<Anomalia>
 }

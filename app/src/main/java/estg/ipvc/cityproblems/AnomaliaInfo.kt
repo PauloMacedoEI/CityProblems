@@ -82,6 +82,7 @@ class AnomaliaInfo : AppCompatActivity() {
                     // User cancelled the dialog
                     dialog.dismiss()
                 }
+                
             }
             // Create the AlertDialog
             builder.create()

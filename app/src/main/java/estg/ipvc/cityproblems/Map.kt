@@ -398,11 +398,11 @@ class Map : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
                             val marker: Marker? = map.addMarker(MarkerOptions()
                                     .position(latlong)
                                     .title(i.titulo)
-                                    .snippet(i.tipo)
+                                    .snippet(i.descricao)
                                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)))
                             marker?.tag = i
                         }else{
-                            val marker: Marker? = map.addMarker(MarkerOptions().position(latlong).title(i.titulo).snippet(i.tipo).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)))
+                            val marker: Marker? = map.addMarker(MarkerOptions().position(latlong).title(i.titulo).snippet(i.descricao).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)))
                             marker?.tag = i
                         }
                     }
@@ -450,6 +450,7 @@ class Map : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
             anomalia.add(marker.tag as Anomalia)
             val intent = Intent(this, AnomaliaInfo::class.java).apply{
                 putExtra("anomaliaX", anomalia)
+                finish()
             }
             startActivity(intent)
         }

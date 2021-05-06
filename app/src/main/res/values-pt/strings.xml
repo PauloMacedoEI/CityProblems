@@ -50,7 +50,8 @@
     <string name="light">Claro</string>
     <string name="very_light">Muito Claro</string>
     <string name="usernameLogin">Utilizador</string>
-    <string name="passwordLogin">Palavra-pass</string>
+    <string name="passwordLogin">Palavra-passe</string>
     <string name="login_menu">Iniciar Sessão</string>
+    <string name="luminosidade">Luminosidade</string>
 
 </resources>
