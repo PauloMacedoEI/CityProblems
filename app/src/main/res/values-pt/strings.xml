@@ -34,5 +34,23 @@
     <string name="popupMensage">Não puderás voltar atrás</string>
     <string name="popConfirm">Sim</string>
     <string name="popupRefuse">Cancelar</string>
+    <string name="user_pass_incorrect">Utilizador ou Password incorretos</string>
+    <string name="distance">Distancia:</string>
+    <string name="meters">Metros</string>
+    <string name="filter_error">Erro no filtro</string>
+    <string name="marker_error">Erro no Marker</string>
+    <string name="welcome1">Bem-vindo</string>
+    <string name="seeMore">Ver mais</string>
+    <string name="up_down">Cima/Baixo</string>
+    <string name="left_right">Esquerda/Direita</string>
+    <string name="you_cant_see">Não consegues ver</string>
+    <string name="very_dark">Muito Escuro</string>
+    <string name="dark">Escuro</string>
+    <string name="normal">Normal</string>
+    <string name="light">Claro</string>
+    <string name="very_light">Muito Claro</string>
+    <string name="usernameLogin">Utilizador</string>
+    <string name="passwordLogin">Palavra-pass</string>
+    <string name="login_menu">Iniciar Sessão</string>
 
 </resources>

@@ -83,19 +83,19 @@ class Sensores : AppCompatActivity(), SensorEventListener {
             val color = if (upDown.toInt() == 0 && sides.toInt() == 0) Color.GREEN else Color.RED
             square.setBackgroundColor(color)
 
-            square.text = "up/down ${upDown.toInt()}\nleft/right ${sides.toInt()}"
+            square.text = getString(R.string.up_down) +": " +"${upDown.toInt()}\n" + getString(R.string.left_right) +": "+ "${sides.toInt()}"
         }
 
     }
 
     private fun brightness(brightness: Float): String {
         return when (brightness.toInt()){
-            0 -> "Pitch black"
-            in 1..10 -> "Dark"
-            in 11..50 -> "Grey"
-            in 51..5000 -> "Normal"
-            in 5001..25000 -> "Incredibly bright"
-            else -> "This light will blind you"
+            0 -> getString(R.string.you_cant_see)
+            in 1..10 -> getString(R.string.very_dark)
+            in 11..50 -> getString(R.string.dark)
+            in 51..5000 -> getString(R.string.normal)
+            in 5001..25000 -> getString(R.string.light)
+            else -> getString(R.string.very_light)
         }
     }
 

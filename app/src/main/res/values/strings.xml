@@ -40,6 +40,24 @@
     <string name="popupMensage">These changes cannot be reversed!</string>
     <string name="popConfirm">Yes</string>
     <string name="popupRefuse">Cancel</string>
+    <string name="user_pass_incorrect">Username or Password incorrect</string>
+    <string name="distance">Distance</string>
+    <string name="meters">Meters</string>
+    <string name="filter_error">Error on filter</string>
+    <string name="marker_error">Marker Error</string>
+    <string name="welcome1">Welcome</string>
+    <string name="seeMore">See more</string>
+    <string name="up_down">Up/Down</string>
+    <string name="left_right">Left/Right</string>
+    <string name="you_cant_see">You Cant See</string>
+    <string name="very_dark">Very Dark</string>
+    <string name="dark">Dark</string>
+    <string name="normal">Normal</string>
+    <string name="light">Light</string>
+    <string name="very_light">Very Light</string>
+    <string name="usernameLogin">Username</string>
+    <string name="passwordLogin">Password</string>
+    <string name="login_menu">Login</string>
 
 
 </resources>

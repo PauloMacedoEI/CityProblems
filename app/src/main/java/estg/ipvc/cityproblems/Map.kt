@@ -103,7 +103,8 @@ class Map : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
 
         val butaoAll = RadioButton(this)
         butaoAll.layoutParams = RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-        butaoAll.setText(R.string.allTypes) //setting text of first radio button
+        butaoAll.setText(R.string.allTypes)
+        butaoAll.setChecked(true)//setting text of first radio button
         butaoAll.id = 3
 
         val radioGroup = RadioGroup(this)
@@ -162,7 +163,7 @@ class Map : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
                                         map.addMarker(MarkerOptions()
                                                 .position(position)
                                                 .title(anomalia.titulo)
-                                                .snippet("Distancia: " + results[0].roundToInt() + " metros")
+                                                .snippet(getString(R.string.distance)+ " " + results[0].roundToInt() + " " + getString(R.string.meters))
                                                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)))
                                     }
                                 }
@@ -205,7 +206,7 @@ class Map : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
                                         map.addMarker(MarkerOptions()
                                                 .position(position)
                                                 .title(anomalia.titulo)
-                                                .snippet("Distancia: " + results[0].roundToInt() + " metros")
+                                                .snippet(getString(R.string.distance)+ " " + results[0].roundToInt() + " " + getString(R.string.meters))
                                                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE)))
                                     }
                                 }
@@ -251,16 +252,16 @@ class Map : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
                                         map.addMarker(MarkerOptions()
                                                 .position(latlong)
                                                 .title(anomalia.titulo)
-                                                .snippet(anomalia.descricao)
+                                                .snippet(anomalia.tipo)
                                                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)))
                                     } else {
-                                        map.addMarker(MarkerOptions().position(latlong).title(anomalia.titulo).snippet(anomalia.descricao).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)))
+                                        map.addMarker(MarkerOptions().position(latlong).title(anomalia.titulo).snippet(anomalia.tipo).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)))
                                     }
                                 }
                             }
                         }
                         override fun onFailure(call: Call<List<Anomalia>>, t: Throwable) {
-                            Toast.makeText(this@Map, getString(R.string.app_name), Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@Map, getString(R.string.filter_error), Toast.LENGTH_SHORT).show()
                         }
                     })
                 }
@@ -299,16 +300,16 @@ class Map : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
                                         map.addMarker(MarkerOptions()
                                                 .position(latlong)
                                                 .title(anomalia.titulo)
-                                                .snippet(anomalia.descricao)
+                                                .snippet(anomalia.tipo)
                                                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)))
                                     } else {
-                                        map.addMarker(MarkerOptions().position(latlong).title(anomalia.titulo).snippet(anomalia.descricao).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)))
+                                        map.addMarker(MarkerOptions().position(latlong).title(anomalia.titulo).snippet(anomalia.tipo).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)))
                                     }
                                 }
                             }
                         }
                         override fun onFailure(call: Call<List<Anomalia>>, t: Throwable) {
-                            Toast.makeText(this@Map, "Filtro Errado!", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@Map, getString(R.string.filter_error), Toast.LENGTH_SHORT).show()
                         }
                     })
                 }
@@ -347,18 +348,19 @@ class Map : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
                                         map.addMarker(MarkerOptions()
                                                 .position(latlong)
                                                 .title(anomalia.titulo)
-                                                .snippet(anomalia.descricao)
+                                                .snippet(anomalia.tipo)
                                                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)))
                                     } else {
-                                        map.addMarker(MarkerOptions().position(latlong).title(anomalia.titulo).snippet(anomalia.descricao).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)))
+                                        map.addMarker(MarkerOptions().position(latlong).title(anomalia.titulo).snippet(anomalia.tipo).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)))
                                     }
                                 }
                             }
                         }
                         override fun onFailure(call: Call<List<Anomalia>>, t: Throwable) {
-                            Toast.makeText(this@Map, "Filtro Errado!", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@Map, getString(R.string.filter_error), Toast.LENGTH_SHORT).show()
                         }
                     })
+
                 }
             }
         }
@@ -372,6 +374,7 @@ class Map : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
         map.setOnMarkerClickListener(this)
         map.mapType = GoogleMap.MAP_TYPE_SATELLITE
 
+        map.clear()
         setUpMap()
 
         val sessaoIniciada: SharedPreferences = getSharedPreferences(
@@ -395,18 +398,18 @@ class Map : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
                             val marker: Marker? = map.addMarker(MarkerOptions()
                                     .position(latlong)
                                     .title(i.titulo)
-                                    .snippet(i.descricao)
+                                    .snippet(i.tipo)
                                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)))
                             marker?.tag = i
                         }else{
-                            val marker: Marker? = map.addMarker(MarkerOptions().position(latlong).title(i.titulo).snippet(i.descricao).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)))
+                            val marker: Marker? = map.addMarker(MarkerOptions().position(latlong).title(i.titulo).snippet(i.tipo).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)))
                             marker?.tag = i
                         }
                     }
                 }
             }
             override fun onFailure(call: Call<List<Anomalia>>, t: Throwable) {
-                Toast.makeText(this@Map, "Markers Errado!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@Map, R.string.marker_error, Toast.LENGTH_SHORT).show()
             }
 
         })

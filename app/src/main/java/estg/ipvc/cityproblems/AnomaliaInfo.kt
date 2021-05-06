@@ -62,7 +62,6 @@ class AnomaliaInfo : AppCompatActivity() {
                     call.enqueue(object : Callback<Anomalia> {
                         override fun onResponse(call: Call<Anomalia>, response: Response<Anomalia>) {
                             if (response.isSuccessful) {
-                                Log.i("VisualizeAnomaly", "Delete anomaly successful")
 
                                 val intent = Intent(this@AnomaliaInfo, Map::class.java)
                                 startActivity(intent)
@@ -71,7 +70,6 @@ class AnomaliaInfo : AppCompatActivity() {
                         }
 
                         override fun onFailure(call: Call<Anomalia>?, t: Throwable?) {
-                            Log.i("VisualizeAnomaly", "Delete anomaly failed")
                             val intent = Intent(this@AnomaliaInfo, Map::class.java)
                             startActivity(intent)
                             finish()
