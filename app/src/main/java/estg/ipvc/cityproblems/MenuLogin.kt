@@ -20,7 +20,7 @@ class MenuLogin : AppCompatActivity() {
             getString(R.string.shared_preferences),
             Context.MODE_PRIVATE
         )
-        welcome.setText("Welcome " + sessaoIniciada.getString("username", null))
+        welcome.setText(getString(R.string.welcome1) + " " + sessaoIniciada.getString("username", null))
 
 
         val notesButton = findViewById<Button>(R.id.goToNotes)

@@ -7,6 +7,7 @@ import android.content.pm.PackageManager
 import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
@@ -88,33 +89,30 @@ class AddAnomalia : AppCompatActivity() {
                     val latitude = lastLocation.latitude
                     val longitude = lastLocation.longitude
 
-                    Log.i("latitude", latitude.toString())
-                    Log.i("longitude", longitude.toString())
-                    Log.i("login_id", user_id.toString())
-                    Log.i("titulo", titulo)
-                    Log.i("tipo", tipo.toString())
-                    Log.i("descricao", descricao)
-
                     val request = ServiceBuilder.buildService(EndPoints::class.java)
                     val call = request.insertAnomalia(titulo,descricao,tipo.toString(),foto,latitude.toString(),longitude.toString(),user_id.toString().toInt())
 
 
+                    if (TextUtils.isEmpty(editTextTitle.text) || TextUtils.isEmpty(editTextDesc.text)){
+                        Toast.makeText(this@AddAnomalia, R.string.cant_be_null, Toast.LENGTH_SHORT).show()
+                    }
+                    else {
+                        call.enqueue(object : Callback<Anomalia> {
+                            override fun onResponse(call: Call<Anomalia>, response: Response<Anomalia>) {
+                                if (response.isSuccessful) {
+                                    Toast.makeText(this@AddAnomalia, R.string.successfully_inserted, Toast.LENGTH_SHORT).show()
 
-                    call.enqueue(object : Callback<Anomalia> {
-                        override fun onResponse(call: Call<Anomalia>, response: Response<Anomalia>) {
-                            if (response.isSuccessful) {
-                                Toast.makeText(this@AddAnomalia, "Adicionado Com Sucesso!", Toast.LENGTH_SHORT).show()
-
-                                val intent = Intent(this@AddAnomalia, Map::class.java)
-                                startActivity(intent)
-                                finish()
+                                    val intent = Intent(this@AddAnomalia, Map::class.java)
+                                    startActivity(intent)
+                                    finish()
+                                }
                             }
-                        }
 
-                        override fun onFailure(call: Call<Anomalia>?, t: Throwable?) {
-                            Toast.makeText(applicationContext, t!!.message, Toast.LENGTH_SHORT).show()
-                        }
-                    })
+                            override fun onFailure(call: Call<Anomalia>?, t: Throwable?) {
+                                Toast.makeText(applicationContext, t!!.message, Toast.LENGTH_SHORT).show()
+                            }
+                        })
+                    }
                 }
             }
         }

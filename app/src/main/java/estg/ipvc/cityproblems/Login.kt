@@ -65,7 +65,7 @@ class Login : AppCompatActivity() {
                     }
                 }
                 override fun onFailure(call: Call<User>, t: Throwable) {
-                    Toast.makeText(this@Login, "Este utilizador/password não existe", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@Login, R.string.user_pass_incorrect, Toast.LENGTH_SHORT).show()
                 }
             })
         }
