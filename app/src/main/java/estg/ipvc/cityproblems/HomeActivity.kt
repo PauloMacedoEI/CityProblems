@@ -34,6 +34,8 @@ class HomeActivity : AppCompatActivity(), NoteAdapter.exemple {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
+        supportActionBar?.hide()
+
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
         val adapter = NoteAdapter(this)
         recyclerView.adapter = adapter

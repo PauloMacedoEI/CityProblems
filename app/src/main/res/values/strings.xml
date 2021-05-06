@@ -9,5 +9,55 @@
     <string name="save">Save</string>
     <string name="empty_not_saved">Title or description not Insert</string>
     <string name="cant_be_null">Tittle and description cannot be empty</string>
+    <string name="notes">Notes</string>
+    <string name="login">Logged</string>
+    <string name="shared_preferences">SharedPreferences</string>
+    <string name="username">username</string>
+    <string name="mapa">Map</string>
+    <string name="welcomeUserLoged">Welcome</string>
+    <string name="logout">Logout</string>
+    <string name="EfetuarLogin">Login</string>
+    <string name="title_activity_map" translatable="false">Map</string>
+    <string name="id" translatable="false">id</string>
+    <string name="addAnomaly">Add Anomaly</string>
+    <string name="successfully_inserted">Successfully Inserted</string>
+    <string name="error">Error</string>
+    <string name="meters_1000">1000 meters</string>
+    <string name="meters_5000">5000 meters</string>
+    <string name="type">Type</string>
+    <string-array name="type_array">
+        <item>Estragos</item>
+        <item>Obras</item>
+        <item>Transito</item>
+    </string-array>
+    <string name="damage">Damage</string>
+    <string name="construction">Construction</string>
+    <string name="traffic">Traffic</string>
+    <string name="allTypes">All</string>
+    <string name="sensors">Sensors</string>
+    <string name="delete">Delete</string>
+    <string name="popupTitulo">Delete</string>
+    <string name="popupMensage">These changes cannot be reversed!</string>
+    <string name="popConfirm">Yes</string>
+    <string name="popupRefuse">Cancel</string>
+    <string name="user_pass_incorrect">Username or Password incorrect</string>
+    <string name="distance">Distance</string>
+    <string name="meters">Meters</string>
+    <string name="filter_error">Error on filter</string>
+    <string name="marker_error">Marker Error</string>
+    <string name="welcome1">Welcome</string>
+    <string name="seeMore">See more</string>
+    <string name="up_down">Up/Down</string>
+    <string name="left_right">Left/Right</string>
+    <string name="you_cant_see">You Cant See</string>
+    <string name="very_dark">Very Dark</string>
+    <string name="dark">Dark</string>
+    <string name="normal">Normal</string>
+    <string name="light">Light</string>
+    <string name="very_light">Very Light</string>
+    <string name="usernameLogin">Username</string>
+    <string name="passwordLogin">Password</string>
+    <string name="login_menu">Login</string>
+
 
 </resources>

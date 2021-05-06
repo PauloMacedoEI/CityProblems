@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddNote"
+    tools:context=".AddAnomalia"
     android:orientation="vertical"
     android:background="@drawable/estrada">
 
     <TextView
-        android:id="@+id/titleLabel"
+        android:id="@+id/anomaliaTitleLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="22dp"
@@ -18,14 +18,14 @@
         android:textStyle="bold"/>
 
     <EditText
-        android:id="@+id/edit_title"
+        android:id="@+id/anomalia_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textAutoComplete"
         android:textSize="15dp"/>
 
     <TextView
-        android:id="@+id/descriptionLabel"
+        android:id="@+id/anomaliaDescriptionLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="22dp"
@@ -34,18 +34,32 @@
         android:textStyle="bold"/>
 
     <EditText
-        android:id="@+id/edit_description"
+        android:id="@+id/anomalia_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textAutoComplete"
         android:textSize="15dp"/>
 
+    <TextView
+        android:id="@+id/anomaliaTypeLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:text="@string/type"
+        android:textSize="25dp"
+        android:textStyle="bold"/>
+
+    <Spinner
+        android:id="@+id/type_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <Button
         android:id="@+id/buttonSave"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/save"/>
-
+        android:onClick="submitAnomalia"
+        android:text="@string/save" />
 
 
 </LinearLayout>

@@ -9,7 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 
 class AddNote : AppCompatActivity() {
-
+//
     private lateinit var editTitleView: EditText
     private lateinit var editDescriptionView: EditText
 
@@ -17,10 +17,13 @@ class AddNote : AppCompatActivity() {
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_note)
+        supportActionBar?.hide()
+
 
         editTitleView = findViewById(R.id.edit_title)
         editDescriptionView = findViewById(R.id.edit_description)
 
+        //button
         val button = findViewById<Button>(R.id.buttonSave)
         button.setOnClickListener {
             val replyIntent = Intent()
